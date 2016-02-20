@@ -14,15 +14,27 @@ public:
 	// Sets default values for this actor's properties
 	AMovingPlatform(const FObjectInitializer& objectInitializer);
 	~AMovingPlatform();
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+	// Called whenever this actor is being removed from a level
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	virtual void OnHit(AActor* Other);
-	virtual void PlatformBeginOverlap(AActor* Other);
-	virtual void PlatformEndOverlap(AActor* Other);
+	// Called on hit
+	virtual void NotifyHit(
+		class UPrimitiveComponent* MyComp,
+		AActor* Other,
+		class UPrimitiveComponent* OtherComp,
+		bool bSelfMoved,
+		FVector HitLocation,
+		FVector HitNormal,
+		FVector NormalImpulse,
+		const FHitResult& Hit
+	) override;
 
 	UPROPERTY(EditAnywhere, Category = Movement)
 		float moveSpeed = 5.0f;
@@ -40,7 +52,7 @@ public:
 		UStaticMeshComponent *movingObject;
 
 private:
-	// Amimation variables
+	// Movement/Amimation variables
 	SmoothInterpolate *smoothInterpolate;
 
 	UPROPERTY(EditAnywhere, Category = Movement)
@@ -53,6 +65,8 @@ private:
 		float pauseTime = 2.0f;
 	UPROPERTY(EditAnywhere, Category = Movement)
 		bool bSweep = false;
+	UPROPERTY(EditAnywhere, Category = Movement)
+		bool teleportType;
 
 	UPROPERTY(VisibleAnywhere, Category = Debug)
 		float  pauseTimer = 0.0f;
@@ -67,6 +81,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Debug)
 		float distToTarget;
 
+	float time = 0.0f;
 	// collision variables
 	//UActorComponent* platformCollider;
 };

@@ -3,7 +3,6 @@
 #include "Proef_Proeve.h"
 #include "MyTestActor.h"
 
-
 // Sets default values
 AMyTestActor::AMyTestActor(const FObjectInitializer& objectInitializer)
 {
@@ -24,7 +23,24 @@ void AMyTestActor::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	// move
 	box->AddWorldOffset(speed, bSweep);
+}
 
+// Called on hit
+void AMyTestActor::NotifyHit(
+	class UPrimitiveComponent* MyComp,
+	AActor* Other,
+	class UPrimitiveComponent* OtherComp,
+	bool bSelfMoved,
+	FVector HitLocation,
+	FVector HitNormal,
+	FVector NormalImpulse,
+	const FHitResult& Hit) 
+{
+	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+
+
+	//UE_LOG(LogTemp, Warning, TEXT("ReceiveHit"));
 }
 

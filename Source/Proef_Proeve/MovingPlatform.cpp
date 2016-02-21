@@ -98,7 +98,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 	{
 		smoothInterpolate->SetOldInterpolation();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("ReceiveHit - IsValidBlockingHit: %d - time: %d"), moveHitResult->IsValidBlockingHit() , time);
+	//UE_LOG(LogTemp, Warning, TEXT("ReceiveHit - IsValidBlockingHit: %d - time: %d"), moveHitResult->IsValidBlockingHit() , time);
 
 	delete moveHitResult;
 }

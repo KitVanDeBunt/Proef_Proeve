@@ -33,7 +33,16 @@ void AMovingPlatform::BeginPlay()
 	startPos = this->GetActorLocation();
 	t = tStart;
 	distToTarget = FVector::Dist(startPos, targetPos->GetComponentLocation());
-	smoothInterpolate = new SmoothInterpolate(startPos, sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult);
+	if(startOnOtherSide)
+	{
+		direction = true;
+		smoothInterpolate = new SmoothInterpolate(targetPos->GetComponentLocation(), sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult, t);
+	}
+	else
+	{
+		direction = false;
+		smoothInterpolate = new SmoothInterpolate(startPos, sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult, t);
+	}
 }
 
 // Called whenever this actor is being removed from a level
@@ -67,12 +76,12 @@ void AMovingPlatform::Tick(float DeltaTime)
 		if (direction)
 		{
 			direction = false;
-			smoothInterpolate = new SmoothInterpolate(startPos, sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult);
+			smoothInterpolate = new SmoothInterpolate(startPos, sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult, 0.0f);
 		}
 		else
 		{
 			direction = true;
-			smoothInterpolate = new SmoothInterpolate(targetPos->GetComponentLocation(), sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult);
+			smoothInterpolate = new SmoothInterpolate(targetPos->GetComponentLocation(), sloopDist, distToTarget, moveSpeed, sloopPower, sloopMult, 0.0f);
 		}
 	}
 

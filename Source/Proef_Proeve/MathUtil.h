@@ -21,7 +21,7 @@ private :
 	float interpolation = 0.0f;
 	float oldInterpolation = 0.0f;
 public :
-	SmoothInterpolate(FVector startPosition, float sloopDist, float dist, float speed, float sloopPower, float speedMult);
+	SmoothInterpolate(FVector startPosition, float sloopDist, float dist, float speed, float sloopPower, float speedMult, float interpolation);
 	~SmoothInterpolate();
 	float UpdatePosition(FVector currentPos, float deltaTime);
 	void SetOldInterpolation();

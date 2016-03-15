@@ -66,6 +66,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = Movement)
 		bool bSweep = false;
 	UPROPERTY(EditAnywhere, Category = Movement)
+		bool startOnOtherSide;
+	UPROPERTY(EditAnywhere, Category = Movement)
 		bool teleportType;
 
 	UPROPERTY(VisibleAnywhere, Category = Debug)

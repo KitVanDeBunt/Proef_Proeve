@@ -6,12 +6,13 @@ FVector MathUtil::Lerp(FVector a, FVector b, float t)
 	return a + t*(b - a);
 }
 
-SmoothInterpolate::SmoothInterpolate(FVector startPosition, float sloopDist, float dist, float speed, float sloopPower, float speedMult){
+SmoothInterpolate::SmoothInterpolate(FVector startPosition, float sloopDist, float dist, float speed, float sloopPower, float speedMult, float interpolation){
 	this->dist = dist;
 	this->speed = speed;
 	this->sloopPower = sloopPower;
 	this->speedMult = speedMult;
 	this->startPosition = startPosition;
+	this->interpolation = interpolation;
 
 	sloopTop = 1.0f;
 	currentSloopLength = sloopDist;
